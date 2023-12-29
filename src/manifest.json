@@ -1,0 +1,31 @@
+{
+  "name": "ats",
+  "description": "ats",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions": [
+    "nativeMessaging",
+    "webRequest",
+    "storage",
+    "unlimitedStorage",
+    "tabs",
+    "activeTab",
+    "history"
+  ],
+  "host_permissions": ["<all_urls>"],
+  "minimum_chrome_version": "116",
+  "action": {
+    "default_title": "ats",
+    "default_popup": "index.html"
+  },
+  "icons": {
+    "16": "assets/icon16.png",
+    "32": "assets/icon32.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  }
+}
