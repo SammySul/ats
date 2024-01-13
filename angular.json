@@ -30,7 +30,7 @@
             "customWebpackConfig": {
               "path": "./custom-webpack.config.ts"
             },
-            "outputPath": "dist/ats",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": ["zone.js"],

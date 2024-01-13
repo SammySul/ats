@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:publish": "ng build && zip dist/file dist",
     "build:firefox": "export FIREFOX=true && ng build",
     "watch": "ng build --watch --configuration development",
     "watch:firefox": "export FIREFOX=true && ng build --watch --configuration development",

@@ -7,7 +7,7 @@ export const plugins = [
     apply: (compiler: Compiler) => {
       compiler.hooks.afterDone.tap('AfterDonePlugin', () => {
         const filePath = path.resolve(__dirname, 'src/manifest.json');
-        const fileDest = path.resolve(__dirname, 'dist/ats/manifest.json');
+        const fileDest = path.resolve(__dirname, 'dist/manifest.json');
         const manifest = require(filePath);
 
         if (
