@@ -2,8 +2,8 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  Input,
   inject,
+  input,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -35,27 +35,27 @@ import { AtsService } from './ats.service';
           >
             <mat-icon>edit </mat-icon>
           </button>
-          {{ at.name }}</mat-card-title
+          {{ $at().name }}</mat-card-title
         >
         <mat-card-subtitle
-          >Abbreviation: {{ '@' }}{{ at.abbreviation }}</mat-card-subtitle
+          >Abbreviation: {{ '@' }}{{ $at().abbreviation }}</mat-card-subtitle
         >
       </mat-card-header>
       <mat-card-content>
         <p><strong>Pattern:</strong></p>
         <p>
-          <u>{{ at.pattern }}</u>
+          <u>{{ $at().pattern }}</u>
         </p>
         <mat-chip-listbox>
           <mat-chip-option
             color="accent"
             disableRipple
             [selectable]="false"
-            [selected]="at.isActive"
+            [selected]="$at().isActive"
           >
-            {{ at.isActive ? 'Active' : 'Inactive' }}
+            {{ $at().isActive ? 'Active' : 'Inactive' }}
           </mat-chip-option>
-          @if(at.isIncognito){
+          @if($at().isIncognito){
           <mat-chip-option disableRipple [selectable]="false" color="accent">
             <img
               matChipAvatar
@@ -96,15 +96,15 @@ export class AtComponent {
   private readonly atsService = inject(AtsService);
   private readonly cdr = inject(ChangeDetectorRef);
 
-  @Input({ required: true }) at: At;
+  $at = input.required<At>({ alias: 'at' });
 
   onEdit() {
-    this.atsService.editAt$.next(this.at);
+    this.atsService.editAt$.next(this.$at());
   }
 
   onRemove() {
     atService
-      .removeAt$(this.at.abbreviation)
+      .removeAt$(this.$at().abbreviation)
       .pipe(tap(() => this.cdr.detectChanges()))
       .subscribe();
   }
