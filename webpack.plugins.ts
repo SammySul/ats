@@ -18,7 +18,7 @@ export const plugins = [
           delete manifest.background.service_worker;
           manifest.browser_specific_settings = {
             gecko: {
-              id: '{ac34afe8-3a2e-4201-b745-346c0cf6ec7d}',
+              id: 'ats@browser-ext.sammysul.com',
             },
           };
         }

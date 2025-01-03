@@ -12,7 +12,9 @@
     "activeTab",
     "history"
   ],
-  "host_permissions": ["<all_urls>"],
+  "host_permissions": [
+    "<all_urls>"
+  ],
   "minimum_chrome_version": "116",
   "action": {
     "default_title": "ats",

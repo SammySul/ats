@@ -11,17 +11,33 @@ chrome.runtime.onConnect.addListener((port) => {
 init();
 
 function init(): void {
-  chrome.webRequest.onCompleted.removeListener(handleAtRequest);
-  chrome.webRequest.onCompleted.addListener(handleAtRequest, {
-    urls: ['https://www.google.com/search*'],
-  });
+  chrome.webRequest.onBeforeRequest.removeListener(handleOriginalRequest);
+  chrome.webRequest.onBeforeRequest.addListener(
+    handleOriginalRequest,
+    {
+      urls: [
+        'https://www.startpage.com/do/dsearch*',
+        'https://www.startpage.com/sp/search*',
+      ],
+    },
+    ['requestBody']
+  );
+}
+
+function handleOriginalRequest(
+  details: chrome.webRequest.WebRequestBodyDetails
+): void {
+  handleAtRequest(details);
 }
 
 async function handleAtRequest(
-  details: chrome.webRequest.WebResponseCacheDetails
+  details: chrome.webRequest.WebRequestBodyDetails
 ): Promise<void> {
   const _ats = await firstValueFrom(atService.ats$);
-  const _searchParam = getQueryParams(details.url)['q'];
+  const _searchParam =
+    getQueryParams(details.url)?.['q'] ??
+    details.requestBody?.formData?.['query']?.[0]?.replace(' ', '+');
+
   const _input = _searchParam.split('+');
   const _candidateAbbr = _input.pop();
 

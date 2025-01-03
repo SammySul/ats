@@ -7,6 +7,7 @@
     "build": "ng build",
     "build:publish": "ng build && zip dist/file dist",
     "build:firefox": "export FIREFOX=true && ng build",
+    "bundle": "cd dist && web-ext build",
     "watch": "ng build --watch --configuration development",
     "watch:firefox": "export FIREFOX=true && ng build --watch --configuration development",
     "test": "ng test"
@@ -42,6 +43,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.2.2"
+    "typescript": "~5.2.2",
+    "web-ext": "^8.3.0"
   }
 }
